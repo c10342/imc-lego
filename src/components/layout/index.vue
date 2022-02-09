@@ -29,6 +29,8 @@ export default defineComponent({
 .layout-container {
   .content {
     min-height: calc(100vh - 134px);
+    box-sizing: border-box;
+    margin: 20px 0;
   }
   .footer {
     background-color: #333;

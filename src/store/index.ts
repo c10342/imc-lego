@@ -1,8 +1,16 @@
 import { createStore } from "vuex";
 
-export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+import userModule, { UserProps } from "./user";
+import editorModule, { EditProps } from "./editor";
+
+export interface GlobalDataProps {
+  userModule: UserProps;
+  editorModule: EditProps;
+}
+
+export default createStore<GlobalDataProps>({
+  modules: {
+    userModule,
+    editorModule,
+  },
 });
