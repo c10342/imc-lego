@@ -1,4 +1,29 @@
 import { mapValues, without } from "lodash-es";
+export interface CommonDefaultProps {
+  // 跳转行为
+  actionType: string;
+  url: string;
+  // size
+  height: string;
+  width: string;
+  paddingLeft: string;
+  paddingRight: string;
+  paddingTop: string;
+  paddingBottom: string;
+  // border type
+  borderStyle: string;
+  borderColor: string;
+  borderWidth: string;
+  borderRadius: string;
+  // shadow and opacity
+  boxShadow: string;
+  opacity: string;
+  // position and x,y
+  position: string;
+  left: string;
+  top: string;
+  right: string;
+}
 export const commonDefaultProps = {
   // 跳转行为
   actionType: "",
@@ -40,6 +65,20 @@ export const textDefaultProps = {
   backgroundColor: "",
   ...commonDefaultProps,
 };
+
+export interface TextDefaultProps extends CommonDefaultProps {
+  // basic props - font styles
+  text: string;
+  fontSize: string;
+  fontFamily: string;
+  fontWeight: string;
+  fontStyle: string;
+  textDecoration: string;
+  lineHeight: string;
+  textAlign: string;
+  color: string;
+  backgroundColor: string;
+}
 
 export const textStylePropNames = without(
   Object.keys(textDefaultProps),

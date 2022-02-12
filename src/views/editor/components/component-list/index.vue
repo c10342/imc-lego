@@ -8,7 +8,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import LText from "../l-text/index.vue";
+import LText from "@/components/l-text/index.vue";
+import { useStore } from "vuex";
+import { GlobalDataProps } from "@/store";
 
 export default defineComponent({
   name: "ComponentList",
@@ -19,10 +21,10 @@ export default defineComponent({
       require: true,
     },
   },
-  emits: ["on-item-click"],
   setup(props, context) {
+    const store = useStore<GlobalDataProps>();
     const onItemClick = (data: any) => {
-      context.emit("on-item-click", data);
+      store.commit("addComponent", data);
     };
 
     return { onItemClick };

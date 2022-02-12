@@ -4,22 +4,18 @@
       <a-layout-header><LegoHeader /></a-layout-header>
       <a-layout>
         <a-layout-sider theme="light" width="300px">
-          <ComponentList
-            :list="defaultTextTemplate"
-            @on-item-click="onItemClick"
-          />
+          <ComponentList :list="defaultTextTemplate" />
         </a-layout-sider>
         <a-layout-content class="preview-container">
-          <div class="preview-list">
-            <component
-              :is="component.name"
-              v-for="component in components"
-              :key="component.id"
-              v-bind="component.props"
-            />
-          </div>
+          <MainContent />
         </a-layout-content>
-        <a-layout-sider theme="light" width="300px">Sider</a-layout-sider>
+        <a-layout-sider theme="light" width="300px">
+          <PropsTable
+            v-if="currentElement && currentElement.props"
+            :props="currentElement.props"
+          />
+          <pre>{{ currentElement && currentElement.props }}</pre>
+        </a-layout-sider>
       </a-layout>
     </a-layout>
   </div>
@@ -30,19 +26,22 @@ import { computed, defineComponent } from "vue";
 import LegoHeader from "@/components/layout/subComponents/header/index.vue";
 import { useStore } from "vuex";
 import { GlobalDataProps } from "@/store/index";
-import LText from "@/components/l-text/index.vue";
-import ComponentList from "@/components/component-list/index.vue";
+import ComponentList from "./components/component-list/index.vue";
 import { defaultTextTemplate } from "@/default-templates";
+import { ComponentData } from "@/store/editor";
+import MainContent from "./components/main-content/index.vue";
+import PropsTable from "./components/props-table/index.vue";
 
 export default defineComponent({
-  components: { LegoHeader, LText, ComponentList },
+  components: { LegoHeader, MainContent, ComponentList, PropsTable },
   setup(props, context) {
     const store = useStore<GlobalDataProps>();
-    const components = computed(() => store.state.editorModule.components);
-    const onItemClick = (data: any) => {
-      store.commit("addComponent", data);
-    };
-    return { components, defaultTextTemplate, onItemClick };
+
+    // 获取选中的元素
+    const currentElement = computed<ComponentData | null>(
+      () => store.getters.getCurrentElement
+    );
+    return { defaultTextTemplate, currentElement };
   },
 });
 </script>
@@ -53,19 +52,7 @@ export default defineComponent({
   .ant-layout {
     height: 100%;
   }
-  .preview-list {
-    padding: 0;
-    margin: 0;
-    min-width: 375px;
-    min-height: 200px;
-    border: 1px solid #efefef;
-    background: #fff;
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: fixed;
-    margin-top: 50px;
-    max-height: 80vh;
-  }
+
   .preview-container {
     padding: 24px;
     margin: 0;

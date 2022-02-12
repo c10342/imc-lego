@@ -20,7 +20,14 @@ export interface EditProps {
 
 const componentsList: ComponentData[] = [
   {
-    props: { text: "hello1", fontSize: "20px", color: "red" },
+    props: {
+      text: "hello1",
+      fontSize: "20px",
+      color: "red",
+      lineHeight: "1",
+      textAlign: "left",
+      fontFamily: '"SimSun","STSong"',
+    },
     name: "l-text",
     id: uuidv4(),
   },
@@ -28,8 +35,8 @@ const componentsList: ComponentData[] = [
     props: {
       text: "hello2",
       fontSize: "10px",
-      actionType: "url",
-      url: "baidu.com",
+      // actionType: "url",
+      // url: "baidu.com",
     },
     name: "l-text",
     id: uuidv4(),
@@ -55,6 +62,25 @@ const editorModule: Module<EditProps, GlobalDataProps> = {
         props,
       };
       state.components.push(newComponent);
+    },
+    // 设置选中组件的id
+    setActive(state, currentId: string) {
+      state.currentElement = currentId;
+    },
+    updateComponent(state, { key, value }) {
+      const currentComponent = state.components.find(
+        (component) => component.id === state.currentElement
+      );
+      if (currentComponent) {
+        currentComponent.props[key] = value;
+      }
+    },
+  },
+  getters: {
+    getCurrentElement(state) {
+      return state.components.find(
+        (component) => component.id === state.currentElement
+      );
     },
   },
 };
