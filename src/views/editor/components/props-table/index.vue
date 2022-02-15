@@ -17,7 +17,7 @@
               :key="k"
               :value="opt.value"
             >
-              {{ opt.text }}
+              <RenderVnode :vNode="opt.text" />
             </component>
           </template>
         </component>
@@ -33,6 +33,8 @@ import { reduce } from "lodash-es";
 import { mapPropsToForms } from "@/props-map";
 import { useStore } from "vuex";
 import { GlobalDataProps } from "@/store";
+import RenderVnode from "@/components/render-vnode/index";
+import ColorPicker from "./sub-components/color-picker.vue";
 
 interface FormProps {
   // 渲染的组件名称
@@ -57,6 +59,7 @@ interface FormProps {
 }
 
 export default defineComponent({
+  components: { RenderVnode, ColorPicker },
   props: {
     props: {
       type: Object as PropType<TextDefaultProps>,

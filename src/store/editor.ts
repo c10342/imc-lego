@@ -23,7 +23,7 @@ const componentsList: ComponentData[] = [
     props: {
       text: "hello1",
       fontSize: "20px",
-      color: "red",
+      color: "#fe4321",
       lineHeight: "1",
       textAlign: "left",
       fontFamily: '"SimSun","STSong"',
