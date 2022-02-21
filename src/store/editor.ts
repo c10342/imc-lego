@@ -55,13 +55,14 @@ const editorModule: Module<EditProps, GlobalDataProps> = {
   },
   mutations: {
     // 添加画布组件
-    addComponent(state, props) {
-      const newComponent: ComponentData = {
-        id: uuidv4(),
-        name: "l-text",
-        props,
-      };
-      state.components.push(newComponent);
+    addComponent(state, componentData) {
+      // const newComponent: ComponentData = {
+      //   id: uuidv4(),
+      //   name: "l-text",
+      //   props,
+      // };
+      // state.components.push(newComponent);
+      state.components.push(componentData);
     },
     // 设置选中组件的id
     setActive(state, currentId: string) {

@@ -66,6 +66,11 @@ export const textDefaultProps = {
   ...commonDefaultProps,
 };
 
+export const imageDefaultProps = {
+  src: "",
+  ...commonDefaultProps,
+};
+
 export interface TextDefaultProps extends CommonDefaultProps {
   // basic props - font styles
   text: string;
@@ -80,11 +85,22 @@ export interface TextDefaultProps extends CommonDefaultProps {
   backgroundColor: string;
 }
 
+export interface ImageDefaultProps extends CommonDefaultProps {
+  src: string;
+}
+
 export const textStylePropNames = without(
   Object.keys(textDefaultProps),
   "actionType",
   "url",
   "text"
+);
+
+export const imageStylePropNames = without(
+  Object.keys(imageDefaultProps),
+  "actionType",
+  "url",
+  "src"
 );
 
 export function transformToComponentProps<T extends { [key: string]: any }>(
