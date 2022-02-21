@@ -62,5 +62,8 @@ export default defineComponent({
     align-items: center;
     position: relative;
   }
+  .l-text-component {
+    position: relative !important;
+  }
 }
 </style>

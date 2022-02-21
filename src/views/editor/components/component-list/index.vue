@@ -9,7 +9,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import LText from "@/components/l-text/index.vue";
 import { useStore } from "vuex";
 import { GlobalDataProps } from "@/store";
 import { ComponentData } from "@/store/editor";
@@ -20,7 +19,7 @@ import { imageDimensions } from "@/helper";
 
 export default defineComponent({
   name: "ComponentList",
-  components: { LText, StyledUploader },
+  components: { StyledUploader },
   props: {
     list: {
       type: Array,

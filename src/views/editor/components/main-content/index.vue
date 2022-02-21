@@ -15,11 +15,9 @@ import { GlobalDataProps } from "@/store";
 import { computed, defineComponent } from "vue";
 import { useStore } from "vuex";
 import EditorWrapper from "./editor-wrapper.vue";
-import LText from "@/components/l-text/index.vue";
-import LImage from "@/components/l-image/index.vue";
 
 export default defineComponent({
-  components: { EditorWrapper, LText, LImage },
+  components: { EditorWrapper },
   setup(props, context) {
     const store = useStore<GlobalDataProps>();
     const components = computed(() => store.state.editorModule.components);
